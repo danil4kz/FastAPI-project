@@ -3,6 +3,8 @@
     <auth-component v-if="!isAuth" @handleAuth="handleAuth" />
     <div v-else>
       <p>Вы авторизованный красавчик</p>
+      <p>Имя: {{ user.name }}</p>
+      <p>Возраст: {{ user.age }}</p>  
     </div>
   </div>
 </template>
@@ -17,12 +19,14 @@ export default {
   }, 
   data() {
     return{
-      isAuth: false
+      isAuth: false,
+      user: null,
     }
   },
   methods: {
-    handleAuth() {
+    handleAuth(userData) {
       this.isAuth = true;
+      this.user = userData; 
     }
   }
 }
