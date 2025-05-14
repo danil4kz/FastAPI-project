@@ -21,7 +21,7 @@
             </div>
             <button type="submit">Авторизоваться</button>
         </form>
-    </div>
+    </div>  
 </template>
   
 <script>
@@ -46,18 +46,35 @@ methods: {
         console.log('Register succes: ' + response.data);
     },
     async login() {
-        const response = await axios.get(`http://127.0.0.1:8000/users/${this.loginName}`)
-        if(response.data) {
-            this.$emit('handleAuth');
-        } else {
-            alert ('Пользователь не найден');
+        try {
+            const response = await axios.get(`http://127.0.0.1:8000/users/${this.loginName}`);
+            if(response.data) {
+                this.$emit('handleAuth', response.data);
+            } else {
+                alert ('Пользователь не найден');
+            }
+        } catch (error) {
+            alert('Ошибка при авторизации');
         }
     }
 }
 }
   </script>
-  
-  <style>
 
-  </style>
+<style>
+body {
+  background-color: #fff8e1; /* Светло-серый фон */
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
   
